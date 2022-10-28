@@ -9,11 +9,20 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import BusData from '../constant/BusData'
+
+
 const  ModalScreen  = (props)=> {
 
   const [showSuccess, setShowSuccess] = useState(false);
   const [form, setForm] = useState({email:'', gender:'', phoneNumber: '', age: '', seats: '' })
 
+
+const submitHandler = ()=>{
+ 
+ console.log(BusData);
+}
+  
 
     return (
       <Modal transparent={true} visible={this.show}>
@@ -42,12 +51,15 @@ const  ModalScreen  = (props)=> {
                 <TextInput
                   style={styles.form}
                   placeholder="number of seat"
-                  onChangeText={(seats) => setForm({...form, seats})}
+                  onChangeText={(seats) => setForm({...form, seats, })}
+                 
                 />
                 <TextInput
+                
                   style={styles.form}
                   placeholder="Enter Email"
                   onChangeText={(email) => setForm({...form, email})}
+                  
                 />
                 <TextInput
                   style={styles.form}
@@ -57,12 +69,12 @@ const  ModalScreen  = (props)=> {
                 <TextInput
                   style={styles.form}
                   placeholder=" enter Age"
-                  onChangeText={(age) => setForm({...form, age: age})}
+                  onChangeText={(age) => setForm({...form,  age})}
                 />
                 <TextInput
                   style={styles.form}
                   placeholder=" Enter Gender"
-                  onChangeText={(gender) => setForm({...form, gender: gender})}
+                  onChangeText={(gender) => setForm({...form,  gender})}
                 />
                 <View
                   style={{
@@ -79,7 +91,8 @@ const  ModalScreen  = (props)=> {
 
                   <Button
                     title="Book Ticket"
-                    onPress={() => {
+                    onPress={() => { 
+                      submitHandler()
                       setShowSuccess(true);
                     }}
                   />

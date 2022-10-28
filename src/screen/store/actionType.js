@@ -1,0 +1,2 @@
+export const USER_DETAILS = 'USER_DETAILS';
+export const CURRENT_USER = 'CURRENT_USER';
