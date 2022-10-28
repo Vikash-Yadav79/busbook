@@ -24,8 +24,8 @@
     "react-native-screens": "^3.18.1",
     "react-native-select-dropdown": "^2.0.4",
     "react-navigation-stack": "^2.10.4",
-    "react-redux": "^7.2.2",
-    "redux": "^4.0.5"
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

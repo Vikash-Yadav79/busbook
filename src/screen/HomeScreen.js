@@ -49,6 +49,11 @@ export default function HomeScreen(props) {
 
   return (
     <>
+    <View style={{marginTop: 60, paddingHorizontal: 80}}>
+        <Button
+          onPress={() => props.navigation.navigate('BookingDetail')}
+          title="BookingDetails"></Button>
+      </View>
       <View style={{paddingHorizontal: 30, paddingTop: 60}}>
         <SelectList
           setSelected={data =>

@@ -38,6 +38,7 @@ function App() {
             component={AvailableBusScreen}
           />
           <Stack.Screen name="ModalScreen" component={ModalScreen} />
+          <Stack.Screen name="BookingDetail" component={BookingDetail} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

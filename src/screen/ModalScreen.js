@@ -1,4 +1,5 @@
 import React, {useState}from 'react';
+import { useEffect } from 'react';
 import {
   Button,
   ScrollView,
@@ -8,6 +9,8 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
+import {connect} from 'react-redux';
+import { setBookingDetails } from '../../store/action';
 
 import BusData from '../constant/BusData'
 
@@ -17,10 +20,14 @@ const  ModalScreen  = (props)=> {
   const [showSuccess, setShowSuccess] = useState(false);
   const [form, setForm] = useState({email:'', gender:'', phoneNumber: '', age: '', seats: '' })
 
-
 const submitHandler = ()=>{
- 
- console.log(BusData);
+  const data = {
+    bookingId: Math.random().toString(36).slice(2, 7),
+    ...form,
+    busDetails: {...props.selectedBusDetails},
+    userId: props.currentUser.id,
+  }
+  props.setBookingDetails({...data});
 }
   
 
@@ -135,4 +142,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalScreen;
+const mapStateToProps = state => ({
+  currentUser: state.app.currentUser,
+  bookingDetails: state.app.bookingDetails,
+});
+
+const mapDispatchToProps = {setBookingDetails};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalScreen);

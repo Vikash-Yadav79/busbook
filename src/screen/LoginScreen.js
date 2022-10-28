@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,17 +9,24 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import {connect} from 'react-redux';
+import { setUser } from "../../store/action";
  
-export default function LoginScreen({navigation}) {
+const LoginScreen = ({navigation, currentUser, userDetails, setUser}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   const Submit = () => {
-    if (email === 'vikash@gmail.com' && password === 'yadav') {
-      navigation.navigate('Home')
-    }else {
-      Alert.alert('Email and password not found');
+    const isUser = userDetails.filter(user => user.email === email);
+    if (isUser && isUser.length) {
+      if (isUser[0].password === password) {
+        setUser(isUser[0]);
+        navigation.navigate('Home');
+      } else {
+        Alert.alert('Wrong Password');
+      }
+    } else {
+      Alert.alert('User not found');
     }
   };
  
@@ -134,3 +142,14 @@ const styles = StyleSheet.create({
     
   }
 });
+
+
+const mapStateToProps = state => ({
+  currentUser: state.app.currentUser,
+  userDetails: state.app.userDetails,
+});
+
+const mapDispatchToProps = {setUser};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

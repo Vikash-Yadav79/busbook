@@ -7,10 +7,24 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import {connect} from 'react-redux';
+import { setNewUser } from '../../store/action';
 
-export default function RegistrationScreen({navigation}) {
+const  RegistrationScreen = ({navigation, setNewUser}) => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const onRegister = () => {
+    const newUserData = {
+      id: Math.random().toString(36).slice(2,7),
+      name,
+      email,
+      password,
+    }
+    setNewUser(newUserData);
+    navigation.navigate('Login');
+  }
 
   return (
     <>
@@ -26,7 +40,7 @@ export default function RegistrationScreen({navigation}) {
           <TextInput
             placeholder="UserName"
             placeholderTextColor="#003f5c"
-            onChangeText={UserName => setEmail(UserName)}
+            onChangeText={UserName => setName(UserName)}
           />
         </View>
 
@@ -51,7 +65,7 @@ export default function RegistrationScreen({navigation}) {
 
         <TouchableOpacity
           style={styles.loginBtn}
-          onPress={() => navigation.navigate('Login')}>
+          onPress={() => onRegister()}>
           <Text style={styles.loginText}>Register</Text>
         </TouchableOpacity>
       </View>
@@ -102,3 +116,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF1493',
   },
 });
+const mapStateToProps = state => ({
+  
+});
+
+const mapDispatchToProps = {setNewUser};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationScreen);
