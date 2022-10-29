@@ -14,14 +14,10 @@ const Stack = createNativeStackNavigator();
 function App() {
   const [availablity, setAvailablity] = useState({});
 
-  useEffect(()=>{
-    
-  },[])
+  useEffect(() => {}, []);
 
   return (
     <>
-
-     {/* <BookingDetail submitHandler={submitHandler}/> */}
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Welcome">
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
