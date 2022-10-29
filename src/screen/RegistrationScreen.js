@@ -8,23 +8,23 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {connect} from 'react-redux';
-import { setNewUser } from '../../store/action';
+import {setNewUser} from '../../store/action';
 
-const  RegistrationScreen = ({navigation, setNewUser}) => {
+const RegistrationScreen = ({navigation, setNewUser}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const onRegister = () => {
     const newUserData = {
-      id: Math.random().toString(36).slice(2,7),
+      id: Math.random().toString(36).slice(2, 7),
       name,
       email,
       password,
-    }
+    };
     setNewUser(newUserData);
     navigation.navigate('Login');
-  }
+  };
 
   return (
     <>
@@ -63,15 +63,13 @@ const  RegistrationScreen = ({navigation, setNewUser}) => {
           />
         </View>
 
-        <TouchableOpacity
-          style={styles.loginBtn}
-          onPress={() => onRegister()}>
+        <TouchableOpacity style={styles.loginBtn} onPress={() => onRegister()}>
           <Text style={styles.loginText}>Register</Text>
         </TouchableOpacity>
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -116,11 +114,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF1493',
   },
 });
-const mapStateToProps = state => ({
-  
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {setNewUser};
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationScreen);

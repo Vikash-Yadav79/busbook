@@ -1,10 +1,9 @@
-import React,{useState} from "react";
-import { useEffect } from "react";
+import React,{useState,useEffect} from "react";
 import { View, Text, Button } from "react-native";
 import {connect} from 'react-redux';
 import { deleteBookingDetail } from "../../store/action";
 
-const BookingDetail = (props,{navigation}) => {
+const BookingDetail = (props) => {
     const [bookingDetails, setBookingDetails] = useState([]);
     useEffect(() => {
         if (props.bookingDetails && props.bookingDetails.length) {
@@ -27,7 +26,7 @@ const BookingDetail = (props,{navigation}) => {
             <Button onPress={() => props.deleteBookingDetail(detail.bookingId)} title = "Delete Booking"/>
         </>)
         })
-      ): <Text>No Bookings</Text>}
+      ): <Text stytle ={{fontSize:20,color:'black'}}>No Bookings</Text>}
      </View>
   )
 }

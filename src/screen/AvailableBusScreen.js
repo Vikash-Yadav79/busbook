@@ -1,27 +1,40 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import BusData from '../constant/BusData';
 import ModalScreen from './ModalScreen';
 import {connect} from 'react-redux';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 
-const AvailbleBusScreen = (props) => {
+const AvailbleBusScreen = props => {
   const data = props.route.params.availablity;
   const [selectedBusDetails, setSelectedBusDetails] = useState({});
   const [showModal, setShowModal] = useState(false);
 
-  const [availableBus, setAvailableBuses] = useState(BusData.filter(
-    bus => bus.source === data.source && bus.destination === data.destination,
-  ));
+  const [availableBus, setAvailableBuses] = useState(
+    BusData.filter(
+      bus => bus.source === data.source && bus.destination === data.destination,
+    ),
+  );
 
   useEffect(() => {
-    const filterDetails = availableBus.map((bus) => {
-      const busDetails = (props.bookingDetails.length && props.bookingDetails.filter(detail => bus.busName === detail.busDetails.busName && detail.busDetails.busNumber === bus.busNumber)) || [];
-      const number = (busDetails.length && busDetails.reduce(
-        (previousValue, currentValue) => previousValue + Number(currentValue.seats),
-        0
-      )) || 0;
-      console.log(number, busDetails);
+    const filterDetails = availableBus.map(bus => {
+      const busDetails =
+        (props.bookingDetails.length &&
+          props.bookingDetails.filter(
+            detail =>
+              bus.busName === detail.busDetails.busName &&
+              detail.busDetails.busNumber === bus.busNumber,
+          )) ||
+        [];
+      const number =
+        (busDetails.length &&
+          busDetails.reduce(
+            (previousValue, currentValue) =>
+              previousValue + Number(currentValue.seats),
+            0,
+          )) ||
+        0;
+
       return {...bus, seatLength: 30 - number};
     });
     setAvailableBuses([...filterDetails]);
@@ -33,7 +46,7 @@ const AvailbleBusScreen = (props) => {
         {availableBus.map(bus => (
           <TouchableOpacity
             style={[styles.item, styles.big]}
-            onPress={() =>{
+            onPress={() => {
               setShowModal(true);
               setSelectedBusDetails({...bus});
             }}>
@@ -42,16 +55,19 @@ const AvailbleBusScreen = (props) => {
             <Text style={{color: 'black', fontSize: 20, fontWeight: 'bold'}}>
               Available seat
             </Text>
-            <Text style={styles.subtext}>
-              {bus.seatLength}
-            </Text>
+            <Text style={styles.subtext}>{bus.seatLength}</Text>
           </TouchableOpacity>
         ))}
       </View>
-      {showModal ? <ModalScreen selectedBusDetails={selectedBusDetails}  setShowModal={setShowModal} /> : null}
+      {showModal ? (
+        <ModalScreen
+          selectedBusDetails={selectedBusDetails}
+          setShowModal={setShowModal}
+        />
+      ) : null}
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   body: {
@@ -89,11 +105,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  // currentUser: state.app.currentUser,
   bookingDetails: state.app.bookingDetails,
 });
 
 const mapDispatchToProps = {};
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(AvailbleBusScreen);

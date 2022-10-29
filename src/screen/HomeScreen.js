@@ -49,7 +49,7 @@ export default function HomeScreen(props) {
 
   return (
     <>
-    <View style={{marginTop: 60, paddingHorizontal: 80}}>
+      <View style={{marginTop: 60, paddingHorizontal: 80}}>
         <Button
           onPress={() => props.navigation.navigate('BookingDetail')}
           title="BookingDetails"></Button>

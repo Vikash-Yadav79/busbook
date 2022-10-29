@@ -1,5 +1,5 @@
 import React, {useState}from 'react';
-import { useEffect } from 'react';
+
 import {
   Button,
   ScrollView,
@@ -12,7 +12,7 @@ import {
 import {connect} from 'react-redux';
 import { setBookingDetails } from '../../store/action';
 
-import BusData from '../constant/BusData'
+
 
 
 const  ModalScreen  = (props)=> {
